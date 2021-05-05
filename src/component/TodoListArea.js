@@ -4,7 +4,6 @@ import Todo from "./Todo"
 
 const TodoListArea = () => {
     const { state } = useContext(AppContext);
-    //const [title, setTitle] = useState("");
     
     return (
         <div>

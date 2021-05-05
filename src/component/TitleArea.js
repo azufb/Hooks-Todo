@@ -1,8 +1,8 @@
 import moment from "moment";
-import 'moment/locale/ja'
+import 'moment/locale/ja';
 
 const TitleArea = () => {
-    const location = moment.locale('ja');
+    moment.locale('ja');
     const result = moment().format('YYYY年MM月DD日(dd)');
 
     return (
