@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import TitleArea from "./TitleArea";
+import TitleArea from "./component/TitleArea";
 
 const App = () => {
   return (
