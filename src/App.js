@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import TitleArea from "./component/TitleArea";
+import { useEffect, useReducer } from "react";
+import reducer from "./reducer";
+import FormArea from "./component/FormArea";
+import TodoListArea from "./component/TodoListArea";
+import AppContext from "./contexts/AppContext";
+import CompletedTodos from "./component/CompletedTodos";
 
-function App() {
+const App = () => {
+  //ローカルストレージに保存したデータを取得。
+  const localData = localStorage.getItem("items");
+
+  const initialState = localData ? JSON.parse(localData) : {
+    todos: [],
+    completedTodos: []
+  }
+
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(state));
+  }, [state]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /* プロバイダーからvalueを渡す。*/
+    <AppContext.Provider value={{ state, dispatch }}>
+      <div className="container">
+        <TitleArea />
+        <FormArea />
+        <TodoListArea />
+        <CompletedTodos />
+      </div>
+    </AppContext.Provider>
   );
 }
 
