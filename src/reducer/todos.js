@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from "../actions";
+import { ADD_TODO, DELETE_TODO, EDITED_TODO } from "../actions";
 
 const todos = (state = [], action) => {
     switch (action.type) {
@@ -20,6 +20,10 @@ const todos = (state = [], action) => {
         case DELETE_TODO:
             // 削除したいタスクのid(action.id)と一致しない(!==)タスクたちで新たに配列を作る。
             return state.filter(todo => todo.id !== action.id);
+        
+        case EDITED_TODO:
+            const newTodo = {id: action.id, title: action.title}
+            return state.splice((action.id-1), 1, {...newTodo});
 
         default:
             return state;
