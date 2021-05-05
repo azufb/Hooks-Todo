@@ -7,7 +7,7 @@ const TitleArea = () => {
 
     return (
         <h1>
-            {result}のタスク一覧
+            {result}のやること
         </h1>
     )
 }
