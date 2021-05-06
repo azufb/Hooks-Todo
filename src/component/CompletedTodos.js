@@ -7,14 +7,19 @@ const CompletedTodos = () => {
     const { state, dispatch } = useContext(AppContext);
 
     const deleteCompletedTodos = () => {
-        dispatch({
-            type: DELETE_COMPLETED_TODOS
-        })
+        const confirmed = window.confirm("完了したタスクたちを全て削除しても良いですか？");
+
+        if (confirmed) {
+            dispatch({
+                type: DELETE_COMPLETED_TODOS
+            });
+        }
     }
+
     return (
         <div>
-            <h3>完了</h3>
-            <button type="button" className="btn btn-danger" onClick={deleteCompletedTodos}>削除</button>
+            <h3>完了！</h3>
+            <button type="button" className="btn btn-danger mb-3" onClick={deleteCompletedTodos}>完了したタスクたちを削除</button>
             <div className="list-group">
                 {
                     state.completedTodos.map((completedTodo, index) => <CompletedTodo key={index} completedTodo={completedTodo} />)
