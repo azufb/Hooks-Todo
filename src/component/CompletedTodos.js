@@ -21,9 +21,9 @@ const CompletedTodos = () => {
 
 
     return (
-        <div>
+        <div className="mb-3 flex-fill w-50 p-3 border-top-0 border-end-0 border-bottom-0 border-primary">
             <h3>完了！</h3>
-            <button type="button" className="btn btn-danger mb-3" onClick={deleteCompletedTodos} disabled={disableDeleteCompleted}>完了したタスクたちを削除</button>
+            <button type="button" className="btn btn-danger mb-3 mt-3" onClick={deleteCompletedTodos} disabled={disableDeleteCompleted}>完了したタスクたちを削除</button>
             <div className="list-group">
                 {
                     state.completedTodos.map((completedTodo, index) => <CompletedTodo key={index} completedTodo={completedTodo} />)

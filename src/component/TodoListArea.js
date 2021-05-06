@@ -6,7 +6,7 @@ const TodoListArea = () => {
     const { state } = useContext(AppContext);
     
     return (
-        <div className="mb-3">
+        <div className="mb-3 flex-fill w-50 p-3">
             <h3>一覧</h3>
             <div className="list-group">
                 {

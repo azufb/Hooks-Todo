@@ -29,8 +29,11 @@ const App = () => {
       <div className="container">
         <TitleArea />
         <FormArea />
-        <TodoListArea />
-        <CompletedTodos />
+        <div className="d-flex">
+          <TodoListArea />
+          <CompletedTodos />
+        </div>
+        
       </div>
     </AppContext.Provider>
   );
