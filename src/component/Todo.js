@@ -3,7 +3,7 @@ import { DELETE_TODO, COMPLETED_TODO, EDITED_TODO } from "../actions";
 import AppContext from "../contexts/AppContext";
 
 const Todo = ({ todo }) => {
-    const { dispatch } = useContext(AppContext);
+    const { state, dispatch } = useContext(AppContext);
     const [content, setContent] = useState("");
     const [editable, setEditable] = useState(false);
     const [title, setTitle] = useState(todo.title);
@@ -58,6 +58,9 @@ const Todo = ({ todo }) => {
         });
 
         todo.title = title;
+
+        console.log(state);
+        localStorage.setItem("items", JSON.stringify(state));
     }
 
     return (
