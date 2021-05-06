@@ -3,26 +3,34 @@ import { DELETE_TODO, COMPLETED_TODO, EDITED_TODO } from "../actions";
 import AppContext from "../contexts/AppContext";
 
 const Todo = ({ todo }) => {
-    const { state, dispatch } = useContext(AppContext);
+    const { dispatch } = useContext(AppContext);
     const [content, setContent] = useState("");
     const [editable, setEditable] = useState(false);
     const [title, setTitle] = useState(todo.title);
     // const title = todo.title;
     const id = todo.id;
 
-    useEffect(() => {
-        setContent(title);
-    }, [title]);
 
     const deleteTodo = () => {
-        dispatch({
-            type: DELETE_TODO,
-            id
-        });
+        const confirmed = window.confirm("このタスクを削除しても良いですか？");
+
+        if (confirmed) {
+            const finalAnswer = window.confirm("このまま先延ばしにして良いのですか？");
+
+            
+
+            if (finalAnswer) {
+                dispatch({
+                    type: DELETE_TODO,
+                    id
+                });
+            } else {
+                window.alert("良い心がけですね。あとちょっと一緒に頑張ってみましょう！");
+            }
+        }
     }
 
     const completeTodo = () => {
-        console.log(todo.title);
         dispatch({
             type: COMPLETED_TODO,
             content
@@ -32,9 +40,11 @@ const Todo = ({ todo }) => {
             type: DELETE_TODO,
             id
         });
-
-        todo.title = "";
     }
+
+    useEffect(() => {
+        setContent(todo.title);
+    }, [todo.title]);
 
     const handleEditable = () => {
         setEditable(!editable);
@@ -47,64 +57,29 @@ const Todo = ({ todo }) => {
             id
         });
 
-        setTitle(title);
         todo.title = title;
     }
 
     return (
-        <div>
-
-            <table class="table">
-                            {
-                                editable ? ( // editableが、trueであれば、編集用フォームを表示。
-                                <>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">内容</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="table-success">
-                                        <td class="table-success" scope="row"><input id="formTodos" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} /></td>
-                                        <td class="table-success"><button type="button" className="btn btn-primary" onClick={edited}>保存</button></td>
-                                        <td class="table-success"><button type="submit" className="btn btn-primary" onClick={handleEditable}>
-                                            とじる
-                                        </button></td>
-                                        <td><button type="button" className="btn btn-danger" onClick={deleteTodo}>削除</button></td>
-                                        <td><button type="button" className="btn btn-success" onClick={completeTodo}>完了</button></td>
-                                        </tr>
-                                    </tbody>
-                                </>
-                                    
-                                ) : (　// editableが、falseであれば、タスク名を表示。
-                                <>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">内容</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="table-success">
-                                        <td class="table-success" scope="row">{todo.title}</td>
-                                        <td class="table-success"><button type="button" className="btn btn-primary" onClick={handleEditable}>
-                                            編集
-                                        </button></td>
-                                        <td class="table-success"><button type="button" className="btn btn-danger" onClick={deleteTodo}>削除</button></td>
-                                        <td class="table-success"><button type="button" className="btn btn-success" onClick={completeTodo}>完了</button></td>
-                                        </tr>
-                                    </tbody>
-                                </>
-                                    
-                                )
-                            }
-            </table>
+        <div className="mb-3">
+            {
+                editable ? ( // editableが、trueであれば、編集用フォームを表示。
+                <>
+                    <input id="formTodos" className="form-control mb-1" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <button type="button" className="btn btn-primary" onClick={edited}>保存</button>
+                    <button type="submit" className="btn btn-primary mx-1" onClick={handleEditable}>とじる</button>
+                </>
+                    
+                ) : (　// editableが、falseであれば、タスク名を表示。
+                <>
+                    <a href="#" className="list-group-item list-group-item-action mb-1">{todo.title}</a>
+                    <button type="button" className="btn btn-primary" onClick={handleEditable}>編集</button>
+                    <button type="button" className="btn btn-danger mx-1" onClick={deleteTodo}>削除</button>
+                    <button type="button" className="btn btn-success" onClick={completeTodo}>完了</button>
+                </>
+                    
+                )
+            }
         </div>
     )
 }
