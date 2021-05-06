@@ -17,17 +17,21 @@ const FormArea = () => {
         // 追加されたら、入力フォーム内は空欄にする。
         setTitle("");
       }
+
+    const disableAdding = title === "";
     
     return (
+      <div className="mb-3">
         <form>
           <div className="form-group">
             <label htmlFor="formTodos">タスク：</label>
             <input id="formTodos" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} />
             <div>
-              <button type="button" className="btn btn-primary" onClick={addTodo}>タスク登録</button>
+              <button type="button" className="btn btn-primary mt-3" onClick={addTodo} disabled={disableAdding}>タスク登録</button>
             </div>
           </div>
         </form>
+      </div>
     );
 }
 

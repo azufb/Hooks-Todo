@@ -6,8 +6,8 @@ const TodoListArea = () => {
     const { state } = useContext(AppContext);
     
     return (
-        <div>
-            <h3>リスト</h3>
+        <div className="mb-3">
+            <h3>一覧</h3>
             <div className="list-group">
                 {
                     state.todos.map((todo, index) => (<Todo key={index} todo={todo} />))
