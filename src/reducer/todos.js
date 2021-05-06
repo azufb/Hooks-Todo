@@ -24,8 +24,7 @@ const todos = (state = [], action) => {
         case EDITED_TODO:
             const newTodo = {id: action.id, title: action.title}
             state.splice((action.id-1), 1, {...newTodo});
-            const spliced = state;
-            return spliced;
+            return state;
 
         default:
             return state;

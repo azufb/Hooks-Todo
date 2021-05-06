@@ -21,11 +21,11 @@ const FormArea = () => {
     const disableAdding = title === "";
     
     return (
-      <div className="mb-3">
+      <div className="pb-3">
         <form>
           <div className="form-group">
-            <label htmlFor="formTodos">タスク：</label>
-            <input id="formTodos" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <label htmlFor="formTodos"></label>
+            <input id="formTodos" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="今日のやることを入力してください。" />
             <div>
               <button type="button" className="btn btn-primary mt-3" onClick={addTodo} disabled={disableAdding}>タスク登録</button>
             </div>

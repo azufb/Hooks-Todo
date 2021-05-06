@@ -6,9 +6,10 @@ const TitleArea = () => {
     const result = moment().format('YYYY年MM月DD日(dd)');
 
     return (
-        <h1>
-            {result}のやること
-        </h1>
+        <div>
+            <h1 className="text-center py-3 fw-bold">今日のやること！</h1>
+            <h3 className="py-3">{result}のやること</h3>
+        </div>
     )
 }
 

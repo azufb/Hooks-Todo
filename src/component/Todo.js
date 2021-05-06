@@ -72,7 +72,7 @@ const Todo = ({ todo }) => {
                     
                 ) : (　// editableが、falseであれば、タスク名を表示。
                 <>
-                    <a href="#" className="list-group-item list-group-item-action mb-1">{todo.title}</a>
+                    <a href="#" className="list-group-item list-group-item-action mb-1 rounded">{todo.title}</a>
                     <button type="button" className="btn btn-primary" onClick={handleEditable}>編集</button>
                     <button type="button" className="btn btn-danger mx-1" onClick={deleteTodo}>削除</button>
                     <button type="button" className="btn btn-success" onClick={completeTodo}>完了</button>
