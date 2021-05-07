@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../contexts/AppContext";
 import CompletedTodo from "./CompletedTodo";
 import { DELETE_COMPLETED_TODOS } from "../actions";
@@ -18,6 +18,12 @@ const CompletedTodos = () => {
     }
 
     const disableDeleteCompleted = state.completedTodos.length === 0;
+
+    useEffect(() => {
+        if (state.completedTodos.length !== 0 && state.todos.length === 0) {
+            window.alert("おめでとう！達成できたね！");
+        }
+    })
 
 
     return (
