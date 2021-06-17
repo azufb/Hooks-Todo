@@ -30,6 +30,10 @@ const Todo = ({ todo }) => {
         }
     }
 
+    useEffect(() => {
+        setTitle(todo.title);
+    }, [todo.title]);
+
     const completeTodo = () => {
         dispatch({
             type: COMPLETED_TODO,
@@ -59,7 +63,6 @@ const Todo = ({ todo }) => {
 
         todo.title = title;
 
-        console.log(state);
         localStorage.setItem("items", JSON.stringify(state));
     }
 

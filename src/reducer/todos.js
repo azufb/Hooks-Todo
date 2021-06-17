@@ -22,8 +22,12 @@ const todos = (state = [], action) => {
             return state.filter(todo => todo.id !== action.id);
         
         case EDITED_TODO:
-            const newTodo = {id: action.id, title: action.title}
-            state.splice((action.id-1), 1, {...newTodo});
+            state.map((event) => {
+                if (event.id === action.id) {
+                  event.title = action.title;
+                }
+                return event;
+              });
             return state;
 
         default:
